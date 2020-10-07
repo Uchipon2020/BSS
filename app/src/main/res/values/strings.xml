@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ScoreSheet</string>
+    <string name="titleView">title_view</string>
+    <string name="resetBtn">リセット！</string>
+    <string name="restart_btn">再開</string>
+    <string name="countDown">countdown</string>
+    <string name="goalBtn">得点！！</string>
+    <string name="stopBtn">STOP</string>
+    <string name="btnStart">TIP OFF</string>
+    <string name="team_a">チームA</string>
+    <string name="team_a_name">TeamA name</string>
+    <string name="team_b">チームB</string>
+    <string name="team_b_name">TeamB name</string>
+    <string name="zero">"06:00.0"</string>
+    <string name="foul">ファール</string>
+    <string name="timeout">タイムアウト</string>
+    <string name="outofbounds">アウト オブ バウンズ</string>
+    <string name="menberChenge">メンバーチェンジ</string>
+    <string name="refelytime">レフェリータイム</string>
+    <string name="vaioltion">バイオレーション</string>
+    <string name="cancel">キャンセル</string>
+</resources>
