@@ -4,8 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2bb7b3"
+    android:background="@android:color/background_light"
     tools:context=".MainStart">
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:text="青4人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_b4"
+        app:layout_constraintTop_toTopOf="@+id/btn_number_b4" />
+
+    <EditText
+        android:id="@+id/btn_number_b5"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_number_b4" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -79,12 +97,177 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
+        android:id="@+id/textView9"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:text="赤 １人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_r1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:text="青1人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_b1"
+        app:layout_constraintTop_toTopOf="@+id/btn_number_b1"
+        tools:text="青1人目" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:text="青5人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_b5"
+        app:layout_constraintTop_toTopOf="@+id/btn_number_b5" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:text="青2人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_b2"
+        app:layout_constraintTop_toTopOf="@+id/btn_number_b2"
+        tools:text="青2人目" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:text="青3人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_b3"
+        app:layout_constraintTop_toTopOf="@+id/btn_number_b3"
+        tools:text="青3人目" />
+
+    <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="403dp" />
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="赤 2人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_r1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="赤 ３人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_r1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="赤 4人目"
+        app:layout_constraintEnd_toStartOf="@+id/btn_number_r1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="58dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="赤 5人目"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <EditText
+        android:id="@+id/btn_number_r1"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/btn_number_b1"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <EditText
+        android:id="@+id/btn_number_b2"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_number_b1" />
+
+    <EditText
+        android:id="@+id/btn_number_b3"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_number_b2" />
+
+    <EditText
+        android:id="@+id/btn_number_b4"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_number_b3" />
+
+    <EditText
+        android:id="@+id/btn_number_r2"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/btn_number_r3"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <EditText
+        android:id="@+id/btn_number_r4"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <EditText
+        android:id="@+id/btn_number_r5"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/textView19" />
 
     <EditText
         android:id="@+id/editTextNumber"
@@ -94,4 +277,5 @@
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
