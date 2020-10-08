@@ -11,7 +11,7 @@ import java.util.List;
 
 class DatabaseHelper  extends SQLiteOpenHelper {
     public static final String SCORE = "SCORE";
-    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_ID = "Id";
     public static final String COLUMN_COUNT_TIMER = "count_timer";
     public static final String COLUMN_PLAYER_NO = "player_No";
     public static final String COLUMN_FOUL_NAME = "foul_name";
