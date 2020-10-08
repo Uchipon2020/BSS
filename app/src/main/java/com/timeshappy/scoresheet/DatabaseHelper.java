@@ -45,9 +45,8 @@ class DatabaseHelper  extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             return true;
         } else {
-
+            return false;
         }
-        return false;
     }
 
     public List<String> getEveryone() {

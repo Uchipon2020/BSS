@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //コンテキスト
     Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item del_line = (Item) parent.getItemAtPosition(position);
-                databaseHelper.deleteOne(del_line);
-                 //delete_data((Item) parent.getItemAtPosition(position));
-                 //boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));
-                //Toast.makeText(MainActivity.this,"DELETE"+ success,Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
+                Boolean success = databaseHelper.deleteOne(del_line);
+                // delete_data((Item) parent.getItemAtPosition(position));
+                // boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));
+                Toast.makeText(MainActivity.this,"DELETE"+ success,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
             }
         });
     }
