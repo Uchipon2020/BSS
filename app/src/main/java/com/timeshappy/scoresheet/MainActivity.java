@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     String et_teama,et_teamb,title_view,taa,tbb;
     ListView lv_item;
 
-
     private Timer timer;
     private CountUpTimerTask timerTask;
     private Handler handler = new Handler();
@@ -36,15 +35,13 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> itemArrayAdapter;
     DatabaseHelper databaseHelper ;
 
-    Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);
-
-
+    Item item = new Item(-1,null,0,0,null,
+            null,0,0,0,0,
+            null,0);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         delay = 0;
         period = 100;
@@ -70,29 +67,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         taa = intent.getStringExtra("ta");
-        item.setTeama_name(taa);
-        et_teama = item.getTeama_name();
+        item.setTeam_A_name(taa);
+        et_teama = item.getTeam_A_name();
 
         tbb = intent.getStringExtra("tb");
-        item.setTeamb_name(tbb);
-        et_teamb = item.getTeamb_name();
+        item.setTeam_B_name(tbb);
+        et_teamb = item.getTeam_B_name();
 
         title_view = (et_teama + "   対   " + et_teamb);
         et_title_view = findViewById(R.id.title_view);
         et_title_view.setText(title_view);
-
-
 
         // タイマー開始--- タイマーが走っている最中にボタンをタップされたケース
         if (null != timer) {
             timer.cancel();
             timer = null;
         }
-
         // Timer インスタンスを生成
         timer = new Timer();
-
-
         // TimerTask インスタンスを生成
         timerTask = new CountUpTimerTask();
 
@@ -262,7 +254,7 @@ class CountUpTimerTask extends TimerTask {
 
         /////////save(戻ってきた）
         DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-        item.setNumber(Item.numberT);
+        item.setPlayer_No(Item.numberT);
         boolean success = databaseHelper.addOne(item);//保存作業
 
         Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
