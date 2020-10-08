@@ -156,8 +156,9 @@ public class MainActivity extends AppCompatActivity {
         lv_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item del_line = (Item) parent.getItemAtPosition(position);
-                Boolean success = databaseHelper.deleteOne(del_line);
+                Item item = (Item) parent.getItemAtPosition(position);
+
+                Boolean success = databaseHelper.deleteOne(item);
                 // delete_data((Item) parent.getItemAtPosition(position));
                 // boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));
                 Toast.makeText(MainActivity.this,"DELETE"+ success,Toast.LENGTH_SHORT).show();
