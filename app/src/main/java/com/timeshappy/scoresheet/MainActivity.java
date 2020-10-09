@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplication(), StopMenu.class);
                     startActivityForResult(intent, 1000);
 
-                    ShowItemOnListView(databaseHelper);//一覧表示用
+                    //ShowItemOnListView(databaseHelper);//一覧表示用
                 }
             }
         });
