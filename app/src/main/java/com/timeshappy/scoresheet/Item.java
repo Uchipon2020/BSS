@@ -6,7 +6,8 @@ class Item {
     private int id;                 //通しID
     private String count_timer;     //現在のタイマー
     private long date;              //開催日
-    private int player_No;       //プレイヤーナンバー
+    private int player_No;          //プレイヤーナンバー
+    private String goal_count;      //ゴールカウント　３，２，１
     private int teamA_foul;         //Aチームファール
     private int teamB_foul;         //Bチームファール
     private String team_A_name;     //Aチーム名
