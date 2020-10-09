@@ -50,25 +50,30 @@ class DatabaseHelper  extends SQLiteOpenHelper {
         }
     }
 
-    public List<String> getEveryone() {
-        List<String> returnList = new ArrayList<>();
+    public List<Item> getEveryone() {
+        List<Item> returnList = new ArrayList<>();
         String queryString = "SELECT * FROM " + SCORE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
+                int customerID = cursor.getInt(0);
                 String count_timer = cursor.getString(1);
                 String player_No = cursor.getString(2);
                 String foul_name = cursor.getString(3);
 
-               if (null == player_No  ){
+                Item newItem = new Item(customerID,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
+
+
+               /*if (null == player_No  ){
                     String newItem = count_timer + " " + foul_name;
                     returnList.add(newItem);
                 }else {
 
                     String newItem = count_timer + " " + player_No + "番" +" "+ foul_name;
                     returnList.add(newItem);
-                }
+                }*/
+               returnList.add(newItem);
             } while (cursor.moveToNext());
         } else {
         }
