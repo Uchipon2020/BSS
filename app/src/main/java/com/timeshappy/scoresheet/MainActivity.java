@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private String zero;
     public CharSequence stopTime;
 
-    ArrayAdapter<String> itemArrayAdapter;
+    ArrayAdapter<Item> itemArrayAdapter;
     DatabaseHelper databaseHelper ;
     //コンテキスト
     Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 Boolean success = databaseHelper.deleteOne(item);
                 // delete_data((Item) parent.getItemAtPosition(position));
                 // boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));
-                Toast.makeText(MainActivity.this,"DELETE"+ success,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"DELETE" + success,Toast.LENGTH_SHORT).show();
                 //Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
             }
         });
