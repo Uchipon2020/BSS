@@ -170,7 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
     //リストを再読み込みして最新のものを表示させるメソッド
    private void ShowItemOnListView(DatabaseHelper databaseHelper) {
-        itemArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getEveryone());
+        itemArrayAdapter = new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_list_item_1,
+                databaseHelper.getEveryone());
         lv_item.setAdapter(itemArrayAdapter);
     }
     //カウンター用処理------------------------------------------------------------------------

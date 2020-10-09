@@ -11,7 +11,7 @@ import java.util.List;
 
 class DatabaseHelper  extends SQLiteOpenHelper {
     public static final String SCORE = "SCORE";
-    public static final String COLUMN_ID = "Id";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_COUNT_TIMER = "count_timer";
     public static final String COLUMN_PLAYER_NO = "player_No";
     public static final String COLUMN_FOUL_NAME = "foul_name";
@@ -36,7 +36,11 @@ class DatabaseHelper  extends SQLiteOpenHelper {
         cv.put(COLUMN_PLAYER_NO, item.getNumber());
         cv.put(COLUMN_FOUL_NAME, item.getFoul_name());
         long insert = db.insert(SCORE, null, cv);
-        return insert != -1;
+        if(insert == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public boolean deleteOne(Item item) {
