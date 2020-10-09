@@ -31,6 +31,7 @@ class DatabaseHelper  extends SQLiteOpenHelper {
     public boolean addOne(Item item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+
         cv.put(COLUMN_COUNT_TIMER, item.getCount_timer());
         cv.put(COLUMN_PLAYER_NO, item.getNumber());
         cv.put(COLUMN_FOUL_NAME, item.getFoul_name());
