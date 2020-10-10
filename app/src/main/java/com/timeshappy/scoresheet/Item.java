@@ -1,7 +1,4 @@
 package com.timeshappy.scoresheet;
-
-
-
 class Item {
     private int id;
     private String count_timer;
@@ -18,12 +15,7 @@ class Item {
 
     public static String numberT;
 
-
-
-
-
-
- public Item(int id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul,String teama_name,String teamb_name, int goal_a, int goal_b,String foul_name) {
+    public Item(int id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul, String teama_name, String teamb_name, int goal_a, int goal_b, String foul_name) {
         this.id = id;
         this.count_timer = count_timer;
         this.date = date;
@@ -38,9 +30,28 @@ class Item {
         this.foul_name = foul_name;
     }
 
+    //toStrings
 
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", count_timer='" + count_timer + '\'' +
+                ", date=" + date +
+                ", number='" + number + '\'' +
+                ", foul=" + foul +
+                ", teamA_foul=" + teamA_foul +
+                ", teamB_foul=" + teamB_foul +
+                ", teama_name='" + teama_name + '\'' +
+                ", teamb_name='" + teamb_name + '\'' +
+                ", goal_a=" + goal_a +
+                ", goal_b=" + goal_b +
+                ", foul_name='" + foul_name + '\'' +
+                '}';
+    }
 
+    //getter setter
     public int getId() {
         return id;
     }
@@ -49,6 +60,13 @@ class Item {
         this.id = id;
     }
 
+    public String getCount_timer() {
+        return count_timer;
+    }
+
+    public void setCount_timer(String count_timer) {
+        this.count_timer = count_timer;
+    }
 
     public long getDate() {
         return date;
@@ -73,15 +91,6 @@ class Item {
     public void setFoul(int foul) {
         this.foul = foul;
     }
-
-    public String getFoul_name() {
-        return foul_name;
-    }
-
-    public void setFoul_name(String foul_name) {
-        this.foul_name = foul_name;
-    }
-
 
     public int getTeamA_foul() {
         return teamA_foul;
@@ -131,11 +140,13 @@ class Item {
         this.goal_b = goal_b;
     }
 
-    public String getCount_timer() {
-        return count_timer;
+    public String getFoul_name() {
+        return foul_name;
     }
 
-    public void setCount_timer(String count_timer) {
-        this.count_timer = count_timer;
+    public void setFoul_name(String foul_name) {
+        this.foul_name = foul_name;
     }
 }
+
+
