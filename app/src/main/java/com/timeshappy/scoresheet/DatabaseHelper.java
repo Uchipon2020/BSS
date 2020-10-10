@@ -21,6 +21,7 @@ class DatabaseHelper  extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
+       // String create_data = "CREATE TABLE,SCORE,id,date ,player_No,count_timer,foul_name,quor";
         String create_data = "CREATE TABLE " + SCORE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_COUNT_TIMER + " TEXT," + COLUMN_PLAYER_NO + " INTEGER," + COLUMN_FOUL_NAME + " TEXT)";
                 db.execSQL(create_data);
     }
@@ -61,21 +62,21 @@ class DatabaseHelper  extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
-                int customerID = cursor.getInt(0);
+                int item_ID = cursor.getInt(0);
                 String count_timer = cursor.getString(1);
                 String player_No = cursor.getString(2);
                 String foul_name = cursor.getString(3);
 
-                Item newItem = new Item(customerID,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
+                Item newItem = new Item(item_ID,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
 
 
                /*if (null == player_No  ){
-                    String newItem = count_timer + " " + foul_name;
-                    returnList.add(newItem);
+                    String item_view = count_timer + " " + foul_name;
+                    returnList.add(item_view);
                 }else {
 
-                    String newItem = count_timer + " " + player_No + "番" +" "+ foul_name;
-                    returnList.add(newItem);
+                    String item_view = count_timer + " " + player_No + "番" +" "+ foul_name;
+                    returnList.add(item_view);
                 }*/
                returnList.add(newItem);
             } while (cursor.moveToNext());
