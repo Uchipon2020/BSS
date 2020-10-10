@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 // delete_data((Item) parent.getItemAtPosition(position));
                 // boolean success = databaseHelper.deleteOne((Item) ;
                 Toast.makeText(MainActivity.this,"DELETE" + success,Toast.LENGTH_SHORT).show();
+                ShowItemOnListView(databaseHelper);//一覧表示用
                 //Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
             }
         });
