@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private String zero;
     public CharSequence stopTime;
 
-    ArrayAdapter<Item> itemArrayAdapter;
+    ArrayAdapter<String> itemArrayAdapter;
     DatabaseHelper databaseHelper ;
     //コンテキスト
     Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);
@@ -171,10 +171,10 @@ public class MainActivity extends AppCompatActivity {
 
     //リストを再読み込みして最新のものを表示させるメソッド
    private void ShowItemOnListView(DatabaseHelper databaseHelper) {
-        itemArrayAdapter = new ArrayAdapter<>(MainActivity.this,
-                android.R.layout.simple_list_item_1,
-                databaseHelper.getEveryone());
-        lv_item.setAdapter(itemArrayAdapter);
+       itemArrayAdapter = new ArrayAdapter<>(MainActivity.this,
+               android.R.layout.simple_list_item_1,
+               databaseHelper.getEveryone());
+       lv_item.setAdapter(itemArrayAdapter);
     }
     //カウンター用処理------------------------------------------------------------------------
     class CountUpTimerTask extends TimerTask {
