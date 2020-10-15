@@ -1,0 +1,157 @@
+Index: app/src/main/java/com/timeshappy/scoresheet/DatabaseHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.timeshappy.scoresheet;\r\n\r\nimport android.content.ContentValues;\r\nimport android.content.Context;\r\nimport android.database.Cursor;\r\nimport android.database.sqlite.SQLiteDatabase;\r\nimport android.database.sqlite.SQLiteOpenHelper;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nclass DatabaseHelper  extends SQLiteOpenHelper {\r\n    public static final String SCORE = \"SCORE\";\r\n    public static final String COLUMN_ID = \"Id\";\r\n    public static final String COLUMN_COUNT_TIMER = \"count_timer\";\r\n    public static final String COLUMN_PLAYER_NO = \"player_No\";\r\n    public static final String COLUMN_FOUL_NAME = \"foul_name\";\r\n\r\n    public DatabaseHelper(Context context) {\r\n        super(context, \"score_sheet.db\", null, 1);\r\n    }\r\n    @Override\r\n    public void onCreate(SQLiteDatabase db) {\r\n        String create_data = \"CREATE TABLE \" + SCORE + \" (\" + COLUMN_ID + \" INTEGER PRIMARY KEY AUTOINCREMENT,\" + COLUMN_COUNT_TIMER + \" TEXT,\" + COLUMN_PLAYER_NO + \" INTEGER,\" + COLUMN_FOUL_NAME + \" TEXT)\";\r\n                db.execSQL(create_data);\r\n    }\r\n    @Override\r\n    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {\r\n    }\r\n\r\n    public boolean addOne(Item item) {\r\n        SQLiteDatabase db = this.getWritableDatabase();\r\n        ContentValues cv = new ContentValues();\r\n        cv.put(COLUMN_COUNT_TIMER, item.getCount_timer());\r\n        cv.put(COLUMN_PLAYER_NO, item.getNumber());\r\n        cv.put(COLUMN_FOUL_NAME, item.getFoul_name());\r\n        long insert = db.insert(SCORE, null, cv);\r\n        return insert != -1;\r\n    }\r\n\r\n    public boolean deleteOne(Item item) {\r\n        SQLiteDatabase db = this.getWritableDatabase();\r\n        String queryString = \"DELETE FROM \" + SCORE + \" WHERE \" + COLUMN_ID + \" = \" + item.getId();\r\n        Cursor cursor = db.rawQuery(queryString, null);\r\n        if (cursor.moveToFirst()) {\r\n            return true;\r\n        } else {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public List<String> getEveryone() {\r\n        List<String> returnList = new ArrayList<>();\r\n        String queryString = \"SELECT * FROM \" + SCORE;\r\n        SQLiteDatabase db = this.getReadableDatabase();\r\n        Cursor cursor = db.rawQuery(queryString, null);\r\n        if (cursor.moveToFirst()) {\r\n            do {\r\n                String count_timer = cursor.getString(1);\r\n                String player_No = cursor.getString(2);\r\n                String foul_name = cursor.getString(3);\r\n\r\n               if (null == player_No  ){\r\n                    String newItem = count_timer + \" \" + foul_name;\r\n                    returnList.add(newItem);\r\n                }else {\r\n\r\n                    String newItem = count_timer + \" \" + player_No + \"番\" +\" \"+ foul_name;\r\n                    returnList.add(newItem);\r\n                }\r\n            } while (cursor.moveToNext());\r\n        } else {\r\n        }\r\n        cursor.close();\r\n        db.close();\r\n        return returnList;\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/timeshappy/scoresheet/DatabaseHelper.java	(revision e50c3a95a3ef8922a6162297da36dd098d39796b)
++++ app/src/main/java/com/timeshappy/scoresheet/DatabaseHelper.java	(date 1602217620635)
+@@ -56,17 +56,22 @@
+         Cursor cursor = db.rawQuery(queryString, null);
+         if (cursor.moveToFirst()) {
+             do {
++                long newId = cursor.getLong(0);
+                 String count_timer = cursor.getString(1);
+                 String player_No = cursor.getString(2);
+                 String foul_name = cursor.getString(3);
+ 
+-               if (null == player_No  ){
+-                    String newItem = count_timer + " " + foul_name;
+-                    returnList.add(newItem);
+-                }else {
++                Item newItem = new Item(newId,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
++               // returnList.add(String.valueOf(newItem));
+ 
+-                    String newItem = count_timer + " " + player_No + "番" +" "+ foul_name;
+-                    returnList.add(newItem);
++              if (player_No == null  ){
++                    String _item = count_timer + " " + foul_name;
++                    returnList.add(_item);
++                }
++                else {
++
++                    String _item = count_timer + " " + player_No + "番" +" "+ foul_name;
++                    returnList.add(_item);
+                 }
+             } while (cursor.moveToNext());
+         } else {
+Index: app/src/main/java/com/timeshappy/scoresheet/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.timeshappy.scoresheet;\r\nclass Item {\r\n    private long id;\r\n    private String count_timer;\r\n    private long date;\r\n    private String number;\r\n    private int foul;\r\n    private int teamA_foul;\r\n    private int teamB_foul;\r\n    private String teama_name;\r\n    private String teamb_name;\r\n    private int goal_a;\r\n    private int goal_b;\r\n    private String foul_name;\r\n\r\n    public static String numberT;\r\n\r\n public Item(long id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul,String teama_name,String teamb_name, int goal_a, int goal_b,String foul_name) {\r\n        this.id = id;\r\n        this.count_timer = count_timer;\r\n        this.date = date;\r\n        this.number = number;\r\n        this.foul = foul;\r\n        this.teamA_foul = teamA_foul;\r\n        this.teamB_foul = teamB_foul;\r\n        this.teama_name = teama_name;\r\n        this.teamb_name = teamb_name;\r\n        this.goal_a = goal_a;\r\n        this.goal_b = goal_b;\r\n        this.foul_name = foul_name;\r\n    }\r\n    public long getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(long id) {\r\n        this.id = id;\r\n    }\r\n\r\n\r\n    public long getDate() {\r\n        return date;\r\n    }\r\n\r\n    public void setDate(long date) {\r\n        this.date = date;\r\n    }\r\n\r\n    public String getNumber() {\r\n        return number;\r\n    }\r\n\r\n    public void setNumber(String number) {\r\n        this.number = number;\r\n    }\r\n\r\n    public int getFoul() {\r\n        return foul;\r\n    }\r\n\r\n    public void setFoul(int foul) {\r\n        this.foul = foul;\r\n    }\r\n\r\n    public String getFoul_name() {\r\n        return foul_name;\r\n    }\r\n\r\n    public void setFoul_name(String foul_name) {\r\n        this.foul_name = foul_name;\r\n    }\r\n\r\n\r\n    public int getTeamA_foul() {\r\n        return teamA_foul;\r\n    }\r\n\r\n    public void setTeamA_foul(int teamA_foul) {\r\n        this.teamA_foul = teamA_foul;\r\n    }\r\n\r\n    public int getTeamB_foul() {\r\n        return teamB_foul;\r\n    }\r\n\r\n    public void setTeamB_foul(int teamB_foul) {\r\n        this.teamB_foul = teamB_foul;\r\n    }\r\n\r\n    public String getTeama_name() {\r\n        return teama_name;\r\n    }\r\n\r\n    public void setTeama_name(String teama_name) {\r\n        this.teama_name = teama_name;\r\n    }\r\n\r\n    public String getTeamb_name() {\r\n        return teamb_name;\r\n    }\r\n\r\n    public void setTeamb_name(String teamb_name) {\r\n        this.teamb_name = teamb_name;\r\n    }\r\n\r\n    public int getGoal_a() {\r\n        return goal_a;\r\n    }\r\n\r\n    public void setGoal_a(int goal_a) {\r\n        this.goal_a = goal_a;\r\n    }\r\n\r\n    public int getGoal_b() {\r\n        return goal_b;\r\n    }\r\n\r\n    public void setGoal_b(int goal_b) {\r\n        this.goal_b = goal_b;\r\n    }\r\n\r\n    public String getCount_timer() {\r\n        return count_timer;\r\n    }\r\n\r\n    public void setCount_timer(String count_timer) {\r\n        this.count_timer = count_timer;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/timeshappy/scoresheet/Item.java	(revision e50c3a95a3ef8922a6162297da36dd098d39796b)
++++ app/src/main/java/com/timeshappy/scoresheet/Item.java	(date 1602207000262)
+@@ -15,7 +15,7 @@
+ 
+     public static String numberT;
+ 
+- public Item(long id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul,String teama_name,String teamb_name, int goal_a, int goal_b,String foul_name) {
++    public Item(long id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul, String teama_name, String teamb_name, int goal_a, int goal_b, String foul_name) {
+         this.id = id;
+         this.count_timer = count_timer;
+         this.date = date;
+@@ -29,23 +29,19 @@
+         this.goal_b = goal_b;
+         this.foul_name = foul_name;
+     }
++
+     public long getId() {
+         return id;
+     }
+-
+-    public void setId(long id) {
++    public void setId(long id){
+         this.id = id;
+     }
+ 
+ 
++
+     public long getDate() {
+         return date;
+     }
+-
+-    public void setDate(long date) {
+-        this.date = date;
+-    }
+-
+     public String getNumber() {
+         return number;
+     }
+Index: app/src/main/java/com/timeshappy/scoresheet/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.timeshappy.scoresheet;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport java.util.Locale;\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    //初期設定エリア\r\n    Button btn_restart,btn_stop,btn_goal,btn_reset;\r\n    TextView et_title_view;\r\n    String et_teama,et_teamb,title_view,taa,tbb;\r\n    ListView lv_item;\r\n\r\n    private Timer timer;\r\n    private CountUpTimerTask timerTask;\r\n    private Handler handler = new Handler();\r\n    private TextView timerText;\r\n    private long count, delay, period, stopCount;\r\n    private String zero;\r\n    public CharSequence stopTime;\r\n\r\n    ArrayAdapter<String> itemArrayAdapter;\r\n    DatabaseHelper databaseHelper ;\r\n    //コンテキスト\r\n    Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        //タイマー初期設定\r\n        delay = 0;\r\n        period = 100;\r\n        count = 4000;\r\n        // \"05:00.0\"\r\n        zero = getString(R.string.zero);\r\n        timerText = findViewById(R.id.countView);\r\n        timerText.setText(zero);\r\n\r\n        //各ボタンセット---------------------------------------------------------------\r\n        btn_restart = findViewById(R.id.btn_restart);\r\n        btn_goal = findViewById(R.id.btn_goal);\r\n        btn_reset = findViewById(R.id.btn_reset);\r\n        btn_stop = findViewById(R.id.btn_stop);\r\n        lv_item = findViewById(R.id.lv_itemList);\r\n\r\n        databaseHelper = new DatabaseHelper(MainActivity.this);\r\n\r\n        ShowItemOnListView(databaseHelper);\r\n\r\n        //前のページからのチーム名の引継ぎ-----------------------------------------------------\r\n        Intent intent = getIntent();\r\n\r\n        taa = intent.getStringExtra(\"ta\");\r\n        item.setTeama_name(taa);\r\n        et_teama = item.getTeama_name();\r\n\r\n        tbb = intent.getStringExtra(\"tb\");\r\n        item.setTeamb_name(tbb);\r\n        et_teamb = item.getTeamb_name();\r\n\r\n        title_view = (et_teama + \"   対   \" + et_teamb);\r\n        et_title_view = findViewById(R.id.title_view);\r\n        et_title_view.setText(title_view);\r\n\r\n        // タイマー開始--- タイマーが走っている最中にボタンをタップされたケース\r\n        if (null != timer) {\r\n            timer.cancel();\r\n            timer = null;\r\n        }\r\n        // Timerエリア\r\n        timer = new Timer();\r\n        timerTask = new CountUpTimerTask();\r\n        // public void schedule (TimerTask task, long delay, long period)\r\n        timer.schedule(timerTask, delay, period);\r\n\r\n        /*Stop---------------------------------------------------------------------------------\r\n        * 停止作業\r\n       */\r\n        btn_stop.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // timer がnullでない、起動しているときのみキャンセルする\r\n                if (null != timer) {\r\n                    // Cancel\r\n                    stopCount = count;\r\n                    stopTime = timerText.getText();\r\n                    timer.cancel();\r\n                    item.setCount_timer((String) stopTime);\r\n\r\n                    Intent intent = new Intent(getApplication(), StopMenu.class);\r\n                    startActivityForResult(intent, 1000);\r\n\r\n                    ShowItemOnListView(databaseHelper);//一覧表示用\r\n                }\r\n            }\r\n        });\r\n        //リスタートボタン-----------------------------------------------------------------------\r\n        btn_restart.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // タイマーが走っている最中にボタンをタップされたケース\r\n                if (null != timer) {\r\n                    timer.cancel();\r\n                    timer = null;\r\n\r\n                    // Timerエリア\r\n                    timer = new Timer();\r\n                    timerTask = new CountUpTimerTask();\r\n                    //public void schedule (TimerTask task, long delay, long period)\r\n                    timer.schedule(timerTask, delay, period);\r\n                    count = stopCount;\r\n                    timerText.setText(stopTime);\r\n                    //Toast.makeText(MainActivity.this,\"timer\"+stopTime,Toast.LENGTH_SHORT).show();\r\n\r\n                    ShowItemOnListView(databaseHelper);//一覧表示用\r\n\r\n                    Button btn = findViewById(R.id.btn_restart);\r\n                    btn.setText(\"再　開\");\r\n                }\r\n            }\r\n        });\r\n        //ゴールボタン---------------------------------------------------------\r\n        btn_goal.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Toast.makeText(MainActivity.this, \"on goal\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n        //リセットボタン----------------------------------------------------------------\r\n        btn_reset.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                timerText = findViewById(R.id.countView);\r\n                timerText.setText(zero);\r\n                count = 40000;\r\n            }\r\n        });\r\n\r\n        //アイテムを押して削除-----------------------------------------------------------------------\r\n\r\n        lv_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {\r\n            @Override\r\n            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {\r\n                Item del_line = (Item) parent.getItemAtPosition(position);\r\n                Boolean success = databaseHelper.deleteOne(del_line);\r\n                // delete_data((Item) parent.getItemAtPosition(position));\r\n                // boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));\r\n                Toast.makeText(MainActivity.this,\"DELETE\"+ success,Toast.LENGTH_SHORT).show();\r\n                //Toast.makeText(MainActivity.this,\"DELETE\"+ del_line,Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n    //リストを再読み込みして最新のものを表示させるメソッド\r\n   private void ShowItemOnListView(DatabaseHelper databaseHelper) {\r\n        itemArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getEveryone());\r\n        lv_item.setAdapter(itemArrayAdapter);\r\n    }\r\n    //カウンター用処理------------------------------------------------------------------------\r\n    class CountUpTimerTask extends TimerTask {\r\n        @Override\r\n    public void run() {\r\n        // handlerを使って処理をキューイングする\r\n        handler.post(new Runnable() {\r\n            public void run() {\r\n                if (count <= 0) {\r\n                    return;\r\n                }\r\n                //count++;\r\n                count--;\r\n                long mm = count * 100 / 1000 / 60;\r\n                long ss = count * 100 / 1000 % 60;\r\n                long ms = (count * 100 - ss * 1000 - mm * 1000 * 60) / 100;\r\n                // 桁数を合わせるために02d(2桁)を設定\r\n                timerText.setText(\r\n                        String.format(Locale.US, \"%1$02d:%2$02d.%3$01d\", mm, ss, ms));\r\n            }\r\n        });\r\n    }}\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        if (requestCode == 1000) {\r\n            if (RESULT_OK == resultCode) {\r\n                String mFoul_name = data.getStringExtra(\"mFoul_name\");\r\n                item.setFoul_name(mFoul_name);\r\n                save_data();\r\n\r\n                ShowItemOnListView(databaseHelper);//一覧表示用\r\n            }\r\n        }\r\n    }\r\n\r\n//save\r\n    public void save_data() {\r\n\r\n        /////////save(戻ってきた）\r\n        DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);\r\n        item.setNumber(Item.numberT);\r\n        boolean success = databaseHelper.addOne(item);//保存作業\r\n\r\n        Toast.makeText(MainActivity.this,\"保存\"+success,Toast.LENGTH_SHORT).show();\r\n    }\r\n    /*public void delete_data(Item _item){\r\n        DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);\r\n        boolean success = databaseHelper.deleteOne(_item);\r\n        Toast.makeText(MainActivity.this,\"削除\"+success,Toast.LENGTH_SHORT).show();\r\n\r\n    }*/\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/timeshappy/scoresheet/MainActivity.java	(revision e50c3a95a3ef8922a6162297da36dd098d39796b)
++++ app/src/main/java/com/timeshappy/scoresheet/MainActivity.java	(date 1602218347995)
+@@ -156,11 +156,12 @@
+         lv_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+-                Item del_line = (Item) parent.getItemAtPosition(position);
+-                Boolean success = databaseHelper.deleteOne(del_line);
++                //Item del_line = (Item) parent.getItemAtPosition(position);
++                item.setId((long)parent.getItemAtPosition(position));
++               boolean success = databaseHelper.deleteOne(item);
+                 // delete_data((Item) parent.getItemAtPosition(position));
+                 // boolean success = databaseHelper.deleteOne((Item) parent.getItemAtPosition(position));
+-                Toast.makeText(MainActivity.this,"DELETE"+ success,Toast.LENGTH_SHORT).show();
++                Toast.makeText(MainActivity.this,"DELETE"+ success ,Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
+             }
+         });
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision e50c3a95a3ef8922a6162297da36dd098d39796b)
++++ .idea/misc.xml	(date 1602752324879)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1602752324963)
++++ .idea/compiler.xml	(date 1602752324963)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision e50c3a95a3ef8922a6162297da36dd098d39796b)
++++ .idea/gradle.xml	(date 1602752325004)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
