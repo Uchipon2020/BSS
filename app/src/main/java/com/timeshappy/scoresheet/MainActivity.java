@@ -174,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
         itemArrayAdapter = new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_list_item_1,
                 databaseHelper.getEveryone());
-        ArrayAdapter itemViewAdapter = item.get(itemArrayAdapter,0);
-        lv_item.setAdapter(itemViewAdapter);
+        //ArrayAdapter itemViewAdapter = item.get(itemArrayAdapter,0);
+        lv_item.setAdapter(itemArrayAdapter);
     }
     //カウンター用処理------------------------------------------------------------------------
     class CountUpTimerTask extends TimerTask {

@@ -26,17 +26,12 @@ class DatabaseHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         String create_data = "CREATE TABLE " + SCORE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_COUNT_TIMER + " TEXT," + COLUMN_PLAYER_NO + " INTEGER," + COLUMN_FOUL_NAME + " TEXT)";
-
-
                 db.execSQL(create_data);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public boolean addOne(Item item) {
@@ -55,55 +50,44 @@ class DatabaseHelper  extends SQLiteOpenHelper {
 
     public boolean deleteOne(Item item) {
 
-
         SQLiteDatabase db = this.getWritableDatabase();
-
         String queryString = "DELETE FROM " + SCORE + " WHERE " + COLUMN_ID + " = " + item.getId();
-
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
             return true;
         }
         else {
-
             return false;
-
         }
     }
 
 
+    public List<Item> getEveryone() {
 
-
-    public List<String> getEveryone() {
-
-        List<String> returnList = new ArrayList<>();
-
+        List<Item> returnList = new ArrayList<>();
         String queryString = "SELECT * FROM " + SCORE;
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
             do {
+                int item_ID = cursor.getInt(0);
                 String count_timer = cursor.getString(1);
                 String player_No = cursor.getString(2);
                 String foul_name = cursor.getString(3);
 
-                if (null == player_No  ){
-                    String newItem = count_timer + " " + foul_name;
-                    returnList.add(newItem);
+                Item newItem = new Item(item_ID,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
+                /*if (null == player_No  ){
+                    String item_view = newItem.getCount_timer() + " " + newItem.getFoul_name();
+                    returnList.add(item_view);
                 }else {
-
-                    String newItem = count_timer + " " + player_No + "番" +" "+ foul_name;
-                    returnList.add(newItem);
-                }
-
-
+                    String item_view = count_timer + " " + player_No + "番" +" "+ foul_name;
+                    returnList.add(item_view);
+                }*/
+                returnList.add(newItem);
             } while (cursor.moveToNext());
         } else {
-
         }
         cursor.close();
         db.close();
