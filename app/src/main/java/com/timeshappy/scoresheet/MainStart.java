@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+//make20201030_1
 
 public class MainStart extends AppCompatActivity {
 

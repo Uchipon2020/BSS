@@ -1,5 +1,5 @@
 package com.timeshappy.scoresheet;
-
+//make20201030_1
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-//updateCord 10290830
+
 public class MainActivity extends AppCompatActivity {
     //初期設定エリア
     Button btn_restart,btn_stop,btn_goal,btn_reset;
