@@ -38,7 +38,6 @@ public class StopMenu extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent mIntent = intent.putExtra("mFoul_name", "ファール");
-
                 setResult(RESULT_OK,mIntent);
                 Intent intent = new Intent(getApplication(), MemberMenu.class);
                 startActivity(intent);

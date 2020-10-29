@@ -20,7 +20,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     //初期設定エリア
     Button btn_restart,btn_stop,btn_goal,btn_reset;
-    TextView et_title_view;
+    TextView et_title_view,goal_a,goal_b;
     String et_teama,et_teamb,title_view,taa,tbb;
     ListView lv_item;
 
@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Item> itemArrayAdapter;
     DatabaseHelper databaseHelper ;
     //コンテキスト
-    Item item = new Item(-1,null,0,null,0,0,0,null,null,0,0,null);
+    Item item = new Item(-1,null,0,null,0,
+            0,0,null,null,
+            0,0,null);
 
 
     @Override
@@ -82,15 +84,11 @@ public class MainActivity extends AppCompatActivity {
             timer.cancel();
             timer = null;
         }
-        // Timerエリア
         timer = new Timer();
         timerTask = new CountUpTimerTask();
-        // public void schedule (TimerTask task, long delay, long period)
         timer.schedule(timerTask, delay, period);
 
-        /*Stop---------------------------------------------------------------------------------
-        * 停止作業
-       */
+      //Stop---------------------------------------------------------------------------------
         btn_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplication(), StopMenu.class);
                     startActivityForResult(intent, 1000);
 
-                    //ShowItemOnListView(databaseHelper);//一覧表示用
                 }
             }
         });
@@ -121,13 +118,9 @@ public class MainActivity extends AppCompatActivity {
                     // Timerエリア
                     timer = new Timer();
                     timerTask = new CountUpTimerTask();
-                    //public void schedule (TimerTask task, long delay, long period)
                     timer.schedule(timerTask, delay, period);
                     count = stopCount;
                     timerText.setText(stopTime);
-                    //Toast.makeText(MainActivity.this,"timer"+stopTime,Toast.LENGTH_SHORT).show();
-
-                    //ShowItemOnListView(databaseHelper);//一覧表示用
 
                     Button btn = findViewById(R.id.btn_restart);
                     btn.setText("再　開");
@@ -139,6 +132,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "on goal", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplication(), MemberMenu.class);
+                startActivity(intent);
+
+                if (item.numberT == "赤"){
+                int i=0 ;
+                i = item.getGoal_a() + 1 ;
+                item.setGoal_a(i);
+                goal_a = findViewById(R.id.text_goal_a);
+                goal_a.setText(i);
+                }else{
+                    int i=0 ;
+
+                    i = item.getGoal_b() + 1 ;
+                    item.setGoal_b(i);
+                    goal_b = findViewById(R.id.text_goal_b);
+                    goal_b.setText(i);
+                }
             }
         });
         //リセットボタン----------------------------------------------------------------
@@ -159,11 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 Item item = (Item) parent.getItemAtPosition(position);
 
                 Boolean success = databaseHelper.deleteOne(item);
-                // delete_data((Item) parent.getItemAtPosition(position));
-                // boolean success = databaseHelper.deleteOne((Item) ;
                 Toast.makeText(MainActivity.this,"DELETE" + success,Toast.LENGTH_SHORT).show();
                 ShowItemOnListView(databaseHelper);//一覧表示用
-                //Toast.makeText(MainActivity.this,"DELETE"+ del_line,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -174,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         itemArrayAdapter = new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_list_item_1,
                 databaseHelper.getEveryone());
-        //ArrayAdapter itemViewAdapter = item.get(itemArrayAdapter,0);
         lv_item.setAdapter(itemArrayAdapter);
     }
     //カウンター用処理------------------------------------------------------------------------
@@ -187,8 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 if (count <= 0) {
                     return;
                 }
-                //count++;
-                count--;
+                count-- ;//カウントダウン
                 long mm = count * 100 / 1000 / 60;
                 long ss = count * 100 / 1000 % 60;
                 long ms = (count * 100 - ss * 1000 - mm * 1000 * 60) / 100;
@@ -199,34 +204,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }}
     @Override
+    /////////save(戻ってきた）
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             if (RESULT_OK == resultCode) {
                 String mFoul_name = data.getStringExtra("mFoul_name");
                 item.setFoul_name(mFoul_name);
-                save_data();
+                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                item.setNumber(Item.numberT);
+                //save
+                boolean success = databaseHelper.addOne(item);//保存作業
+                item.setNumber(null);//保存したのでリセット
+                Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
 
                 ShowItemOnListView(databaseHelper);//一覧表示用
             }
         }
     }
-
-//save
-    public void save_data() {
-
-        /////////save(戻ってきた）
-        DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-        item.setNumber(Item.numberT);
-        boolean success = databaseHelper.addOne(item);//保存作業
-
-        Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
-    }
-    /*public void delete_data(Item _item){
-        DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-        boolean success = databaseHelper.deleteOne(_item);
-        Toast.makeText(MainActivity.this,"削除"+success,Toast.LENGTH_SHORT).show();
-
-    }*/
-
 }
+
+

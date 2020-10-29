@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2bb7b3"
+    android:background="@android:color/background_light"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,7 +15,9 @@
         android:gravity="center_vertical"
         android:text="@string/titleView"
         android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,11 +25,11 @@
         android:id="@+id/btn_reset"
         android:layout_width="146dp"
         android:layout_height="47dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/resetBtn"
+        app:layout_constraintBottom_toTopOf="@+id/countView"
         app:layout_constraintEnd_toStartOf="@+id/btn_restart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lv_itemList" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_restart"
@@ -44,9 +46,9 @@
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:layout_marginBottom="40dp"
         android:background="#fff100"
         android:gravity="center"
         android:paddingLeft="10dp"
@@ -58,20 +60,19 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_goal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_reset" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_goal"
         android:layout_width="162dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
         android:text="@string/goalBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_stop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_stop"
@@ -92,19 +93,17 @@
         app:layout_constraintTop_toBottomOf="@+id/title_view" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_goal_a"
         android:layout_width="50dp"
         android:layout_height="49dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/countView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/countView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text_goal_b"
         android:layout_width="52dp"
         android:layout_height="51dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/countView"
         app:layout_constraintTop_toTopOf="@+id/countView" />
