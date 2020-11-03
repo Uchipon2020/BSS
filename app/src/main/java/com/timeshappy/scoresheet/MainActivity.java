@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn_stop = findViewById(R.id.btn_stop);
         lv_item = findViewById(R.id.lv_itemList);
 
+
         databaseHelper = new DatabaseHelper(MainActivity.this);
 
         ShowItemOnListView(databaseHelper);
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
         title_view = (et_teama + "   対   " + et_teamb);
         et_title_view = findViewById(R.id.title_view);
         et_title_view.setText(title_view);
+
+        //
+        goal_a = findViewById(R.id.text_goal_a);
+        goal_a.setText("0");
+        goal_b = findViewById(R.id.text_goal_b);
+        goal_b.setText("0");
 
         // タイマー開始--- タイマーが走っている最中にボタンをタップされたケース
         if (null != timer) {
@@ -131,23 +138,22 @@ public class MainActivity extends AppCompatActivity {
         btn_goal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "on goal", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplication(), MemberMenu.class);
+                Toast.makeText(MainActivity.this, "変更", Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(getApplication(), MemberMenu.class);
                 startActivity(intent);
 
-                if (item.numberT == "赤"){
-                int i=0 ;
+                if (item.numberT == "赤1"){
+                    int i ;
                 i = item.getGoal_a() + 1 ;
                 item.setGoal_a(i);
-                goal_a = findViewById(R.id.text_goal_a);
-                goal_a.setText(i);
+                String ii = String.valueOf(i);
+                goal_a.setText(ii);
                 }else{
-                    int i=0 ;
-
+                    int i;
                     i = item.getGoal_b() + 1 ;
                     item.setGoal_b(i);
-                    goal_b = findViewById(R.id.text_goal_b);
-                    goal_b.setText(i);
+                    String ii = String.valueOf(i);
+                    goal_b.setText(ii);
                 }
             }
         });
