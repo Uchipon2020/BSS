@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //ゴールボタン A---------------------------------------------------------
+        //ゴールボタン A---------------------------------------------------------20201106 point
         btn_goal_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
