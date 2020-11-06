@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     //初期設定エリア
-    Button btn_restart,btn_stop,btn_goal,btn_reset;
+    Button btn_restart,btn_stop,btn_reset,btn_goal_a,btn_goal_b;
     TextView et_title_view,goal_a,goal_b;
     String et_teama,et_teamb,title_view,taa,tbb;
     ListView lv_item;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Item> itemArrayAdapter;
     DatabaseHelper databaseHelper ;
     //コンテキスト
-    Item item = new Item(-1,null,0,null,0,
+    Item item = new Item(-1,null,0,0,0,
             0,0,null,null,
             0,0,null);
 
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         //各ボタンセット---------------------------------------------------------------
         btn_restart = findViewById(R.id.btn_restart);
-        btn_goal = findViewById(R.id.btn_goal);
+        btn_goal_a = findViewById(R.id.btn_goal_a);
+        btn_goal_b = findViewById(R.id.btn_goal_b);
         btn_reset = findViewById(R.id.btn_reset);
         btn_stop = findViewById(R.id.btn_stop);
         lv_item = findViewById(R.id.lv_itemList);
@@ -134,29 +135,52 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //ゴールボタン---------------------------------------------------------
-        btn_goal.setOnClickListener(new View.OnClickListener() {
+        //ゴールボタン A---------------------------------------------------------
+        btn_goal_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "変更", Toast.LENGTH_SHORT).show();
-               Intent intent = new Intent(getApplication(), MemberMenu.class);
-                startActivity(intent);
+                stopTime = timerText.getText();
+                item.setCount_timer((String) stopTime);
 
-                if (item.numberT == "赤1"){
-                    int i ;
-                i = item.getGoal_a() + 1 ;
+                int i;
+                i = item.getGoal_a() + 2;
                 item.setGoal_a(i);
                 String ii = String.valueOf(i);
                 goal_a.setText(ii);
-                }else{
-                    int i;
-                    i = item.getGoal_b() + 1 ;
-                    item.setGoal_b(i);
-                    String ii = String.valueOf(i);
-                    goal_b.setText(ii);
-                }
+
+                ShowItemOnListView(databaseHelper);
+
+                Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplication(), MemberMenu.class);
+                startActivity(intent);
+            }});
+
+
+        //ゴールボタン Ｂ---------------------------------------------------------
+        btn_goal_b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                stopTime = timerText.getText();
+                item.setCount_timer((String) stopTime);
+
+                int i;
+                i = item.getGoal_b() + 2;
+                item.setGoal_b(i);
+                String ii = String.valueOf(i);
+                goal_b.setText(ii);
+
+                ShowItemOnListView(databaseHelper);
+
+                Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplication(), MemberMenu.class);
+                startActivity(intent);
             }
+
+
         });
+
+
         //リセットボタン----------------------------------------------------------------
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 count = 40000;
             }
         });
+
 
         //アイテムを押して削除-----------------------------------------------------------------------
 
@@ -221,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 item.setNumber(Item.numberT);
                 //save
                 boolean success = databaseHelper.addOne(item);//保存作業
-                item.setNumber(null);//保存したのでリセット
+                item.setNumber(0);//保存したのでリセット
                 Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
 
                 ShowItemOnListView(databaseHelper);//一覧表示用

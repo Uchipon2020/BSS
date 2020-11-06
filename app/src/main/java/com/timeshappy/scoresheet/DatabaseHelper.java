@@ -80,8 +80,9 @@ class DatabaseHelper  extends SQLiteOpenHelper {
                 String count_timer = cursor.getString(1);
                 String player_No = cursor.getString(2);
                 String foul_name = cursor.getString(3);
+                int player = Integer.valueOf(player_No);
 
-                Item newItem = new Item(item_ID,count_timer,0,player_No,0,0,0,null,null,0,0,foul_name);
+                Item newItem = new Item(item_ID,count_timer,0,player,0,0,0,null,null,0,0,foul_name);
                 returnList.add(newItem);
             } while (cursor.moveToNext());
         } else {

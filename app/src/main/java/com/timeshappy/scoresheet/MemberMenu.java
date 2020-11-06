@@ -39,7 +39,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-             Item.numberT = "赤4";
+             Item.numberT = 0;
                 setResult(RESULT_OK,intent);
              finish();
             }
@@ -49,7 +49,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "赤5";
+                Item.numberT = 1;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -59,7 +59,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "赤6";
+                Item.numberT = 2;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -69,7 +69,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "赤7";
+                Item.numberT = 3;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -79,7 +79,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "赤8";
+                Item.numberT = 4;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -89,7 +89,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "青４";
+                Item.numberT = 5;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -99,7 +99,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "青５";
+                Item.numberT = 6;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -109,7 +109,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "青６";
+                Item.numberT = 7;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -118,7 +118,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "青７";
+                Item.numberT = 8;
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -127,7 +127,7 @@ public class MemberMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Item.numberT = "青８";
+                Item.numberT = 9;
                 setResult(RESULT_OK,intent);
                 finish();
             }

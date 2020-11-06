@@ -3,7 +3,7 @@ class Item {
     private int id;
     private String count_timer;
     private long date;
-    private String number;
+    private int number;
     private int foul;
     private int teamA_foul;
     private int teamB_foul;
@@ -13,9 +13,9 @@ class Item {
     private int goal_b;
     private String foul_name;
 
-    public static String numberT;
+    public static int numberT;
 
-    public Item(int id, String count_timer, long date, String number, int foul, int teamA_foul, int teamB_foul, String teama_name, String teamb_name, int goal_a, int goal_b, String foul_name) {
+    public Item(int id, String count_timer, long date, int number, int foul, int teamA_foul, int teamB_foul, String teama_name, String teamb_name, int goal_a, int goal_b, String foul_name) {
         this.id = id;
         this.count_timer = count_timer;
         this.date = date;
@@ -76,11 +76,11 @@ class Item {
         this.date = date;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
