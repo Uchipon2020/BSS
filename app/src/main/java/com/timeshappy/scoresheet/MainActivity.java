@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     timerText.setText(stopTime);
 
                     Button btn = findViewById(R.id.btn_restart);
-                    btn.setText("再　開");
+                    btn.setText("再開");
                 }
             }
         });
@@ -148,12 +148,13 @@ public class MainActivity extends AppCompatActivity {
                 String ii = String.valueOf(i);
                 goal_a.setText(ii);
 
-                ShowItemOnListView(databaseHelper);
-
                 Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplication(), MemberMenu.class);
                 startActivity(intent);
-            }});
+
+                ShowItemOnListView(databaseHelper);
+            }
+        });
 
 
         //ゴールボタン Ｂ---------------------------------------------------------
@@ -170,11 +171,13 @@ public class MainActivity extends AppCompatActivity {
                 String ii = String.valueOf(i);
                 goal_b.setText(ii);
 
-                ShowItemOnListView(databaseHelper);
+
 
                 Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplication(), MemberMenu.class);
                 startActivity(intent);
+
+                ShowItemOnListView(databaseHelper);
             }
 
 

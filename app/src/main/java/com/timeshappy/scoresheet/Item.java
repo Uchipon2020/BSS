@@ -15,6 +15,7 @@ class Item {
 
     public static int numberT;
 
+
     public Item(int id, String count_timer, long date, int number, int foul, int teamA_foul, int teamB_foul, String teama_name, String teamb_name, int goal_a, int goal_b, String foul_name) {
         this.id = id;
         this.count_timer = count_timer;
@@ -37,17 +38,17 @@ class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", count_timer='" + count_timer + '\'' +
-                ", date=" + date +
-                ", number='" + number + '\'' +
-                ", foul=" + foul +
-                ", teamA_foul=" + teamA_foul +
-                ", teamB_foul=" + teamB_foul +
+                ", 時間:" + count_timer + '\'' +
+                ", 実施日:" + date +
+                ", 番号：" + number + '\'' +
+                ", ファール：" + foul +
+                ", ﾁｰﾑﾌｧｰﾙA：" + teamA_foul +
+                ", ﾁｰﾑﾌｧｰﾙB：" + teamB_foul +
                 ", teama_name='" + teama_name + '\'' +
                 ", teamb_name='" + teamb_name + '\'' +
-                ", goal_a=" + goal_a +
-                ", goal_b=" + goal_b +
-                ", foul_name='" + foul_name + '\'' +
+                ", ｺﾞｰﾙA：" + goal_a +
+                ", ｺﾞｰﾙB：" + goal_b +
+                ", foul：" + foul_name + '\'' +
                 '}';
     }
 
