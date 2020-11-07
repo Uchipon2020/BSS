@@ -77,7 +77,7 @@ class DatabaseHelper  extends SQLiteOpenHelper {
     public List<Item> getEveryone() {
 
         List<Item> returnList = new ArrayList<>();
-        String queryString = "SELECT * FROM " + SCORE;
+        String queryString = "SELECT * FROM SCORE";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -90,9 +90,9 @@ class DatabaseHelper  extends SQLiteOpenHelper {
                 String goal_a = cursor.getString(4);
                 String goal_b = cursor.getString(5);
 
-                int t_goal_a = Integer.valueOf(goal_a);
-                int t_goal_b = Integer.valueOf(goal_b);
-                int player = Integer.valueOf(player_No);
+                int t_goal_a = Integer.parseInt(goal_a);
+                int t_goal_b = Integer.parseInt(goal_b);
+                int player = Integer.parseInt(player_No);
 
                 Item newItem = new Item(item_ID,count_timer,0,player,0,0,0,null,null,t_goal_a,t_goal_b,foul_name);
 

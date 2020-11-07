@@ -139,21 +139,30 @@ public class MainActivity extends AppCompatActivity {
         btn_goal_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                synchronized(this) {
+                    Intent intent = new Intent(getApplication(), MemberMenu.class);
+                    startActivity(intent);
                 stopTime = timerText.getText();
                 item.setCount_timer((String) stopTime);
+                Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
+                Intent mIntent = intent.putExtra("mFoul_name", "得点");
+                setResult(RESULT_OK,mIntent);
 
                 int i;
                 i = item.getGoal_a() + 2;
                 item.setGoal_a(i);
                 String ii = String.valueOf(i);
                 goal_a.setText(ii);
+                }
+                await(){
 
-                Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplication(), MemberMenu.class);
-                startActivity(intent);
+                boolean success = databaseHelper.addOne(item);//保存作業
+                item.setNumber(0);//保存したのでリセット
+                Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
 
                 ShowItemOnListView(databaseHelper);
-            }
+            }}
         });
 
 
@@ -172,10 +181,13 @@ public class MainActivity extends AppCompatActivity {
                 goal_b.setText(ii);
 
 
-
                 Toast.makeText(MainActivity.this, "ゴール！！", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplication(), MemberMenu.class);
                 startActivity(intent);
+
+                boolean success = databaseHelper.addOne(item);//保存作業
+                item.setNumber(0);//保存したのでリセット
+                Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
 
                 ShowItemOnListView(databaseHelper);
             }
