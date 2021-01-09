@@ -155,14 +155,14 @@ public class MainActivity extends AppCompatActivity {
                 String ii = String.valueOf(i);
                 goal_a.setText(ii);
                 }
-                await(){
+
 
                 boolean success = databaseHelper.addOne(item);//保存作業
                 item.setNumber(0);//保存したのでリセット
                 Toast.makeText(MainActivity.this,"保存"+success,Toast.LENGTH_SHORT).show();
 
                 ShowItemOnListView(databaseHelper);
-            }}
+            }
         });
 
 
